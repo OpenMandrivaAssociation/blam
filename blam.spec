@@ -11,6 +11,7 @@ Release: %{release}
 Epoch: 1
 Source0: http://www.cmartin.tk/blam/%{name}-%{version}.tar.bz2
 Patch: blam-firefox.patch
+Patch1: blam-1.8.4-desktopentry.patch
 # gw add planet mandriva feed
 Patch2: blam-20060709-planetmandriva.patch
 License: GPL
@@ -40,6 +41,7 @@ This is a GNOME RSS aggregator based on Mono.
 
 %prep
 %setup -q -n %name-%version
+%patch1 -p1
 %patch2 -p1 -b .planetmandriva
 %if %mdkversion <= 200700
 %patch -p1 -b .firefox
@@ -76,10 +78,6 @@ cat > %buildroot/%_menudir/%name << EOF
 	mimetypes="text/rss,application/rss+xml" \
         longtitle="GNOME RSS aggregator" xdg="true"
 EOF
-desktop-file-install --vendor="" \
-  --remove-category="Application" \
-  --add-category="X-MandrivaLinux-Internet-News" \
-  --dir $RPM_BUILD_ROOT%{_datadir}/applications $RPM_BUILD_ROOT%{_datadir}/applications/*
 
 
 %find_lang %name
