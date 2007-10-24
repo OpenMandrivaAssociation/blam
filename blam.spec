@@ -1,6 +1,6 @@
 %define name blam
 %define version 1.8.4
-%define release %mkrel 6
+%define release %mkrel 7
 #fixed2
 %{?!mkrel:%define mkrel(c:) %{-c: 0.%{-c*}.}%{!?_with_unstable:%(perl -e '$_="%{1}";m/(.\*\\D\+)?(\\d+)$/;$rel=${2}-1;re;print "$1$rel";').%{?subrel:%subrel}%{!?subrel:1}.%{?distversion:%distversion}%{?!distversion:%(echo $[%{mdkversion}/10])}}%{?_with_unstable:%{1}}%{?distsuffix:%distsuffix}%{?!distsuffix:mdk}}
 
@@ -22,7 +22,6 @@ BuildRequires: mono-devel
 BuildRequires: gnome-sharp2
 BuildRequires: glade-sharp2
 BuildRequires: gecko-sharp2
-BuildRequires: dbus-sharp
 BuildRequires: libgnomeui2-devel
 BuildRequires: mozilla-firefox-devel >= 0.10
 BuildRequires: perl-XML-Parser
