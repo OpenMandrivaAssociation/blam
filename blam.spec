@@ -17,7 +17,6 @@ Patch2: blam-20060709-planetmandriva.patch
 License: GPL
 Group: Networking/Other
 Url:  http://www.cmartin.tk/blam.html
-BuildRoot: %{_tmppath}/%{name}-%{version}-%{release}-buildroot
 BuildRequires: mono-devel
 BuildRequires: gnome-sharp2
 BuildRequires: glade-sharp2
