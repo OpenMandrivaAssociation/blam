@@ -65,18 +65,6 @@ mkdir -p %buildroot{%_liconsdir,%_iconsdir,%_miconsdir}
 convert -scale 48x48 icons/%name.png %buildroot%_liconsdir/%name.png
 convert -scale 32x32 icons/%name.png %buildroot%_iconsdir/%name.png
 convert -scale 16x16 icons/%name.png %buildroot%_miconsdir/%name.png
-mkdir -p %buildroot/%_menudir
-cat > %buildroot/%_menudir/%name << EOF
-?package(%name): \
-        command="%_bindir/%name" \
-        needs="X11" \
-        section="Internet/News" \
-        icon="%name.png" \
-        title="BLAM!" \
-	startup_notify="true" \
-	mimetypes="text/rss,application/rss+xml" \
-        longtitle="GNOME RSS aggregator" xdg="true"
-EOF
 
 
 %find_lang %name
@@ -109,7 +97,6 @@ rm -rf $RPM_BUILD_ROOT
 %_datadir/%name
 %_datadir/pixmaps/%name.png
 %_mandir/man1/blam.1*
-%_menudir/%name
 %_liconsdir/%name.png
 %_iconsdir/%name.png
 %_miconsdir/%name.png
