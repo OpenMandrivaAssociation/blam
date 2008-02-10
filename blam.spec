@@ -14,6 +14,8 @@ Patch: blam-firefox.patch
 Patch1: blam-1.8.4-desktopentry.patch
 # gw add planet mandriva feed
 Patch2: blam-20060709-planetmandriva.patch
+# gw new gnome-sharp needs this
+Patch3: blam-1.8.4-gnome-sharp.patch
 License: GPL
 Group: Networking/Other
 Url:  http://www.cmartin.tk/blam.html
@@ -42,10 +44,13 @@ This is a GNOME RSS aggregator based on Mono.
 %setup -q -n %name-%version
 %patch1 -p1
 %patch2 -p1 -b .planetmandriva
+%patch3 -p1
 %if %mdkversion <= 200700
 %patch -p1 -b .firefox
 ./autogen.sh
 %endif
+#gw patch 3:
+autoconf
 
 %build
 %configure2_5x --prefix=%_prefix --libdir=%_libdir --sysconfdir=%_sysconfdir \
