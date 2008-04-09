@@ -1,8 +1,6 @@
 %define name blam
-%define version 1.8.4
-%define release %mkrel 12
-#fixed2
-%{?!mkrel:%define mkrel(c:) %{-c: 0.%{-c*}.}%{!?_with_unstable:%(perl -e '$_="%{1}";m/(.\*\\D\+)?(\\d+)$/;$rel=${2}-1;re;print "$1$rel";').%{?subrel:%subrel}%{!?subrel:1}.%{?distversion:%distversion}%{?!distversion:%(echo $[%{mdkversion}/10])}}%{?_with_unstable:%{1}}%{?distsuffix:%distsuffix}%{?!distsuffix:mdk}}
+%define version 1.8.5
+%define release %mkrel 1
 
 Summary: RSS aggregator written in C# using Mono, GTK# and RSS.NET
 Name: %{name}
@@ -14,16 +12,15 @@ Patch: blam-firefox.patch
 Patch1: blam-1.8.4-desktopentry.patch
 # gw add planet mandriva feed
 Patch2: blam-20060709-planetmandriva.patch
-# gw new gnome-sharp needs this
-Patch3: blam-1.8.4-gnome-sharp.patch
 License: GPL
 Group: Networking/Other
 Url:  http://www.cmartin.tk/blam.html
 BuildRoot: %{_tmppath}/%{name}-%{version}-%{release}-buildroot
 BuildRequires: mono-devel
-BuildRequires: gnome-sharp2
+BuildRequires: gnome-sharp2-devel
 BuildRequires: glade-sharp2
 BuildRequires: gecko-sharp2
+BuildRequires: ndesk-dbus-glib
 BuildRequires: libgnomeui2-devel
 BuildRequires: mozilla-firefox-devel >= 0.10
 BuildRequires: perl-XML-Parser
@@ -44,7 +41,6 @@ This is a GNOME RSS aggregator based on Mono.
 %setup -q -n %name-%version
 %patch1 -p1
 %patch2 -p1 -b .planetmandriva
-%patch3 -p1
 %if %mdkversion <= 200700
 %patch -p1 -b .firefox
 ./autogen.sh
@@ -80,6 +76,7 @@ rm -f %buildroot%_prefix/lib/%name/*.a
 %update_desktop_database
 %post_install_gconf_schemas %name
 %{update_menus}
+%update_icon_cache hicolor
 
 %preun
 %preun_uninstall_gconf_schemas
@@ -88,6 +85,7 @@ rm -f %buildroot%_prefix/lib/%name/*.a
 %{clean_menus}
 %clean_scrollkeeper
 %clean_desktop_database
+%clean_icon_cache hicolor
 
 %clean
 rm -rf $RPM_BUILD_ROOT
@@ -102,6 +100,7 @@ rm -rf $RPM_BUILD_ROOT
 %_datadir/%name
 %_datadir/pixmaps/%name.png
 %_mandir/man1/blam.1*
+%_iconsdir/hicolor/*/apps/*
 %_liconsdir/%name.png
 %_iconsdir/%name.png
 %_miconsdir/%name.png
