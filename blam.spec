@@ -71,21 +71,25 @@ convert -scale 16x16 icons/%name.png %buildroot%_miconsdir/%name.png
 %find_lang %name
 rm -f %buildroot%_prefix/lib/%name/*.a
 
+%if %mdkversion < 200900
 %post
 %update_scrollkeeper
 %update_desktop_database
 %post_install_gconf_schemas %name
 %{update_menus}
 %update_icon_cache hicolor
+%endif
 
 %preun
 %preun_uninstall_gconf_schemas
 
+%if %mdkversion < 200900
 %postun
 %{clean_menus}
 %clean_scrollkeeper
 %clean_desktop_database
 %clean_icon_cache hicolor
+%endif
 
 %clean
 rm -rf $RPM_BUILD_ROOT
