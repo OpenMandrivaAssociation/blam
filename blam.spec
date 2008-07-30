@@ -1,6 +1,6 @@
 %define name blam
 %define version 1.8.5
-%define release %mkrel 4
+%define release %mkrel 5
 
 Summary: RSS aggregator written in C# using Mono, GTK# and RSS.NET
 Name: %{name}
@@ -8,11 +8,15 @@ Version: %{version}
 Release: %{release}
 Epoch: 1
 Source0: http://www.cmartin.tk/blam/%{name}-%{version}.tar.bz2
-Patch: blam-firefox.patch
 Patch1: blam-1.8.4-desktopentry.patch
 # gw add planet mandriva feed
 Patch2: blam-20060709-planetmandriva.patch
-License: GPL
+#gw from Fedora: xulrunner patches:
+#FIXME: this is patching configure only, go figure
+Patch4:	blam-xulrunner.patch
+Patch5: blam-xulrunner-configure.patch
+
+License: GPLv2+
 Group: Networking/Other
 Url:  http://www.cmartin.tk/blam.html
 BuildRoot: %{_tmppath}/%{name}-%{version}-%{release}-buildroot
@@ -41,23 +45,14 @@ This is a GNOME RSS aggregator based on Mono.
 %setup -q -n %name-%version
 %patch1 -p1
 %patch2 -p1 -b .planetmandriva
-%if %mdkversion <= 200700
-%patch -p1 -b .firefox
-./autogen.sh
-%endif
-#gw patch 3:
-autoconf
+%patch4 -p1 -b .xl
+%patch5 -p1 -b .xlc
 
 %build
-%configure2_5x --prefix=%_prefix --libdir=%_libdir --sysconfdir=%_sysconfdir \
-%if %mdkversion > 200700
-	--with-mozilla=firefox
-%else
-	--with-mozilla=mozilla-firefox
-%endif
+%configure2_5x --disable-static \
+	       --with-gecko=libxul
 
-#gw parallel build is broken
-make
+%make
 
 %install
 rm -rf $RPM_BUILD_ROOT
@@ -69,7 +64,6 @@ convert -scale 16x16 icons/%name.png %buildroot%_miconsdir/%name.png
 
 
 %find_lang %name
-rm -f %buildroot%_prefix/lib/%name/*.a
 
 %if %mdkversion < 200900
 %post
