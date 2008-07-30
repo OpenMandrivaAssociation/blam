@@ -1,7 +1,7 @@
 %define name blam
 %define version 1.8.5
 %define release %mkrel 5
-
+%define xulrunner
 Summary: RSS aggregator written in C# using Mono, GTK# and RSS.NET
 Name: %{name}
 Version: %{version}
@@ -26,15 +26,14 @@ BuildRequires: glade-sharp2
 BuildRequires: gecko-sharp2
 BuildRequires: ndesk-dbus-glib
 BuildRequires: libgnomeui2-devel
-BuildRequires: mozilla-firefox-devel >= 0.10
-BuildRequires: perl-XML-Parser
+BuildRequires: xulrunner-devel-unstable >= %xulrunner
 BuildRequires: ImageMagick
 BuildRequires: desktop-file-utils
 #gw if we run autoconf
 BuildRequires: automake1.8
 BuildRequires: intltool
 BuildRequires: libtool
-Requires: libmozilla-firefox = %(rpm -q --queryformat %{VERSION} mozilla-firefox)
+Requires: %mklibname xulrunner %xulrunner
 Requires(post): desktop-file-utils scrollkeeper
 Requires(postun): desktop-file-utils scrollkeeper
 
