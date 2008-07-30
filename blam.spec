@@ -1,7 +1,7 @@
 %define name blam
 %define version 1.8.5
 %define release %mkrel 5
-%define xulrunner
+%define xulrunner 1.9
 Summary: RSS aggregator written in C# using Mono, GTK# and RSS.NET
 Name: %{name}
 Version: %{version}
