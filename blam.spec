@@ -1,6 +1,6 @@
 %define name blam
 %define version 1.8.5
-%define release %mkrel 5
+%define release %mkrel 6
 %define xulrunner 1.9
 Summary: RSS aggregator written in C# using Mono, GTK# and RSS.NET
 Name: %{name}
@@ -8,11 +8,11 @@ Version: %{version}
 Release: %{release}
 Epoch: 1
 Source0: http://www.cmartin.tk/blam/%{name}-%{version}.tar.bz2
+Patch: blam-1.8.5-new-gnome-print-sharp.patch
 Patch1: blam-1.8.4-desktopentry.patch
 # gw add planet mandriva feed
 Patch2: blam-20060709-planetmandriva.patch
 #gw from Fedora: xulrunner patches:
-#FIXME: this is patching configure only, go figure
 Patch4:	blam-xulrunner.patch
 Patch5: blam-xulrunner-configure.patch
 
@@ -22,6 +22,7 @@ Url:  http://www.cmartin.tk/blam.html
 BuildRoot: %{_tmppath}/%{name}-%{version}-%{release}-buildroot
 BuildRequires: mono-devel
 BuildRequires: gnome-sharp2-devel
+BuildRequires: gnome-desktop-sharp-devel
 BuildRequires: glade-sharp2
 BuildRequires: gecko-sharp2
 BuildRequires: ndesk-dbus-glib
@@ -42,14 +43,17 @@ This is a GNOME RSS aggregator based on Mono.
 
 %prep
 %setup -q -n %name-%version
+%patch -p1
 %patch1 -p1
 %patch2 -p1 -b .planetmandriva
 %patch4 -p1 -b .xl
 %patch5 -p1 -b .xlc
+#gw patch 0,5
+autoconf
 
 %build
 %configure2_5x --disable-static \
-	       --with-gecko=libxul
+	       --with-mozilla=mozilla
 
 %make
 
