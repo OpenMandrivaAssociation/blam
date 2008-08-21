@@ -1,6 +1,7 @@
 %define name blam
 %define version 1.8.6
-%define release %mkrel 1
+%define release %mkrel 2
+%define _requires_exceptions lib.*x11\\|lib.*gtk
 Summary: RSS aggregator written in C# using Mono, GTK# and RSS.NET
 Name: %{name}
 Version: %{version}
@@ -19,6 +20,7 @@ License: GPLv2+
 Group: Networking/Other
 Url:  http://www.cmartin.tk/blam.html
 BuildRoot: %{_tmppath}/%{name}-%{version}-%{release}-buildroot
+BuildArch: noarch
 BuildRequires: mono-devel
 BuildRequires: gnome-sharp2-devel
 BuildRequires: gnome-desktop-sharp-devel
@@ -50,7 +52,7 @@ This is a GNOME RSS aggregator based on Mono.
 autoconf
 
 %build
-%configure2_5x --disable-static --disable-schemas-install
+./configure --prefix=%_prefix --sysconfdir=%_sysconfdir --disable-static --disable-schemas-install
 %make
 
 %install
@@ -73,7 +75,7 @@ cp icons/16x16/%name.png %buildroot%_miconsdir/%name.png
 %endif
 
 %preun
-%preun_uninstall_gconf_schemas
+%preun_uninstall_gconf_schemas %name
 
 %if %mdkversion < 200900
 %postun
