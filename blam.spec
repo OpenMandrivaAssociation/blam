@@ -1,7 +1,6 @@
 %define name blam
-%define version 1.8.5
-%define release %mkrel 6
-%define xulrunner 1.9
+%define version 1.8.6
+%define release %mkrel 1
 Summary: RSS aggregator written in C# using Mono, GTK# and RSS.NET
 Name: %{name}
 Version: %{version}
@@ -11,7 +10,7 @@ Source0: http://www.cmartin.tk/blam/%{name}-%{version}.tar.bz2
 Patch: blam-1.8.5-new-gnome-print-sharp.patch
 Patch1: blam-1.8.4-desktopentry.patch
 # gw add planet mandriva feed
-Patch2: blam-20060709-planetmandriva.patch
+Patch2: blam-1.8.6-planetmandriva.patch
 #gw from Fedora: xulrunner patches:
 Patch4:	blam-xulrunner.patch
 Patch5: blam-xulrunner-configure.patch
@@ -27,14 +26,13 @@ BuildRequires: glade-sharp2
 BuildRequires: gecko-sharp2
 BuildRequires: ndesk-dbus-glib
 BuildRequires: libgnomeui2-devel
-BuildRequires: xulrunner-devel-unstable >= %xulrunner
+BuildRequires: webkit-sharp-devel
 BuildRequires: ImageMagick
 BuildRequires: desktop-file-utils
 #gw if we run autoconf
-BuildRequires: automake1.8
+BuildRequires: automake
 BuildRequires: intltool
 BuildRequires: libtool
-Requires: %mklibname xulrunner %xulrunner
 Requires(post): desktop-file-utils scrollkeeper
 Requires(postun): desktop-file-utils scrollkeeper
 
@@ -46,25 +44,22 @@ This is a GNOME RSS aggregator based on Mono.
 %patch -p1
 %patch1 -p1
 %patch2 -p1 -b .planetmandriva
-%patch4 -p1 -b .xl
-%patch5 -p1 -b .xlc
+#patch4 -p1 -b .xl
+#patch5 -p1 -b .xlc
 #gw patch 0,5
 autoconf
 
 %build
-%configure2_5x --disable-static \
-	       --with-mozilla=mozilla
-
+%configure2_5x --disable-static --disable-schemas-install
 %make
 
 %install
 rm -rf $RPM_BUILD_ROOT
-GCONF_DISABLE_MAKEFILE_SCHEMA_INSTALL=1 %makeinstall_std
+%makeinstall_std
 mkdir -p %buildroot{%_liconsdir,%_iconsdir,%_miconsdir}
-convert -scale 48x48 icons/%name.png %buildroot%_liconsdir/%name.png
-convert -scale 32x32 icons/%name.png %buildroot%_iconsdir/%name.png
-convert -scale 16x16 icons/%name.png %buildroot%_miconsdir/%name.png
-
+cp icons/48x48/%name.png %buildroot%_liconsdir/%name.png
+cp icons/32x32/%name.png %buildroot%_iconsdir/%name.png
+cp icons/16x16/%name.png %buildroot%_miconsdir/%name.png
 
 %find_lang %name
 
@@ -99,11 +94,8 @@ rm -rf $RPM_BUILD_ROOT
 %_prefix/lib/%name
 %_datadir/applications/%name.desktop
 %_datadir/%name
-%_datadir/pixmaps/%name.png
 %_mandir/man1/blam.1*
 %_iconsdir/hicolor/*/apps/*
 %_liconsdir/%name.png
 %_iconsdir/%name.png
 %_miconsdir/%name.png
-
-
