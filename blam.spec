@@ -29,7 +29,7 @@ BuildRequires: gecko-sharp2
 BuildRequires: ndesk-dbus-glib
 BuildRequires: libgnomeui2-devel
 BuildRequires: webkit-sharp-devel
-BuildRequires: ImageMagick
+BuildRequires: imagemagick
 BuildRequires: desktop-file-utils
 #gw if we run autoconf
 BuildRequires: automake
