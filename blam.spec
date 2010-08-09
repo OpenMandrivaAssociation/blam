@@ -21,7 +21,7 @@ BuildRequires: mono-devel
 BuildRequires: gnome-sharp2-devel
 BuildRequires: gnome-desktop-sharp-devel
 BuildRequires: glade-sharp2
-BuildRequires: ndesk-dbus-glib
+BuildRequires: ndesk-dbus-glib-devel
 BuildRequires: webkit-sharp-devel
 BuildRequires: imagemagick
 BuildRequires: desktop-file-utils
