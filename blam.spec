@@ -1,6 +1,6 @@
 %define name blam
 %define version 1.8.7
-%define release %mkrel 3
+%define release %mkrel 4
 %define _requires_exceptions lib.*x11\\|lib.*gtk
 Summary: RSS aggregator written in C# using Mono, GTK# and RSS.NET
 Name: %{name}
