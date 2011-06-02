@@ -1,20 +1,20 @@
 %define name blam
-%define version 1.8.7
-%define release %mkrel 4
+%define version 1.8.8
+%define release %mkrel 1
 %define _requires_exceptions lib.*x11\\|lib.*gtk
 Summary: RSS aggregator written in C# using Mono, GTK# and RSS.NET
 Name: %{name}
 Version: %{version}
 Release: %{release}
 Epoch: 1
-Source0: http://www.cmartin.tk/blam/%{name}-%{version}.tar.bz2
+Source0: http://blam.cmartin.tk/downloads/%{name}-%{version}.tar.bz2
 Patch1: blam-1.8.4-desktopentry.patch
 # gw add planet mandriva feed
 Patch2: blam-1.8.6-planetmandriva.patch
 
 License: GPLv2+
 Group: Networking/Other
-Url:  http://www.cmartin.tk/blam.html
+Url:  http://blam.cmartin.tk/
 BuildRoot: %{_tmppath}/%{name}-%{version}-%{release}-buildroot
 BuildArch: noarch
 BuildRequires: mono-devel
@@ -23,6 +23,7 @@ BuildRequires: gnome-desktop-sharp-devel
 BuildRequires: glade-sharp2
 BuildRequires: ndesk-dbus-glib-devel
 BuildRequires: webkit-sharp-devel
+BuildRequires: notify-sharp-devel
 BuildRequires: imagemagick
 BuildRequires: desktop-file-utils
 BuildRequires: intltool
