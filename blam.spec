@@ -1,5 +1,5 @@
 %define name blam
-%define version 1.8.8
+%define version 1.8.9
 %define release %mkrel 1
 %define _requires_exceptions lib.*x11\\|lib.*gtk
 Summary: RSS aggregator written in C# using Mono, GTK# and RSS.NET
@@ -8,9 +8,11 @@ Version: %{version}
 Release: %{release}
 Epoch: 1
 Source0: http://blam.cmartin.tk/downloads/%{name}-%{version}.tar.bz2
+Patch0: blam-1.8.9-fix-build.patch
 Patch1: blam-1.8.4-desktopentry.patch
 # gw add planet mandriva feed
 Patch2: blam-1.8.6-planetmandriva.patch
+Patch3: blam-1.8.9-fix-dbus-configure-check.patch
 
 License: GPLv2+
 Group: Networking/Other
@@ -21,7 +23,7 @@ BuildRequires: mono-devel
 BuildRequires: gnome-sharp2-devel
 BuildRequires: gnome-desktop-sharp-devel
 BuildRequires: glade-sharp2
-BuildRequires: ndesk-dbus-glib-devel
+BuildRequires: dbus-sharp-glib-devel
 BuildRequires: webkit-sharp-devel
 BuildRequires: notify-sharp-devel
 BuildRequires: imagemagick
@@ -35,8 +37,9 @@ This is a GNOME RSS aggregator based on Mono.
 
 %prep
 %setup -q -n %name-%version
-%patch1 -p1
-%patch2 -p1 -b .planetmandriva
+%apply_patches
+
+autoconf
 
 %build
 ./configure --prefix=%_prefix --sysconfdir=%_sysconfdir --disable-schemas-install
