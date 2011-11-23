@@ -1,6 +1,6 @@
 %define name blam
 %define version 1.8.9
-%define release %mkrel 1
+%define release %mkrel 2
 %define _requires_exceptions lib.*x11\\|lib.*gtk
 Summary: RSS aggregator written in C# using Mono, GTK# and RSS.NET
 Name: %{name}
@@ -26,6 +26,7 @@ BuildRequires: glade-sharp2
 BuildRequires: dbus-sharp-glib-devel
 BuildRequires: webkit-sharp-devel
 BuildRequires: notify-sharp-devel
+BuildRequires: libGConf2-devel
 BuildRequires: imagemagick
 BuildRequires: desktop-file-utils
 BuildRequires: intltool
