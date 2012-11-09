@@ -1,0 +1,8 @@
+--- blam-1.8.6/collection.xml.planetmandriva	2008-06-16 17:41:11.000000000 +0200
++++ blam-1.8.6/collection.xml	2008-08-21 12:17:13.000000000 +0200
+@@ -1,4 +1,5 @@
+ <ChannelCollection>
++    <Channel Name="Planet Mandriva" Url="http://planetmandriva.zarb.org/rss20.xml"/>
+     <Channel Name="Planet GNOME" Url="http://planet.gnome.org/rss20.xml"/>
+ 	
+     <Channel Name="Monologue" Url="http://www.go-mono.com/monologue/index.rss"/>

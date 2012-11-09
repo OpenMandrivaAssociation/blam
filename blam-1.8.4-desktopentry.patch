@@ -1,0 +1,17 @@
+diff -p -up blam-1.8.5/blam.desktop.in.in~ blam-1.8.5/blam.desktop.in.in
+--- blam-1.8.5/blam.desktop.in.in~	2008-03-31 09:38:10.000000000 +0200
++++ blam-1.8.5/blam.desktop.in.in	2008-03-31 09:38:56.000000000 +0200
+@@ -3,11 +3,11 @@ Version=1.0
+ _Name=Blam Feed Reader
+ _Comment=Feed reader
+ Exec=blam
+-Icon=blam.png
++Icon=blam
+ StartupNotify=true
+ Terminal=false
+ Type=Application
+-Categories=Application;Network;
++Categories=Network;News;GNOME;GTK;
+ X-GNOME-Bugzilla-Bugzilla=GNOME
+ X-GNOME-Bugzilla-Product=blam
+ X-GNOME-Bugzilla-Component=General

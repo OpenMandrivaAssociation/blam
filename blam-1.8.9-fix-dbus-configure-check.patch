@@ -1,0 +1,32 @@
+--- blam-1.8.9/configure.in.0003~	2011-07-31 14:21:26.000000000 +0200
++++ blam-1.8.9/configure.in	2011-11-28 09:36:03.520003354 +0100
+@@ -61,22 +61,22 @@ AC_ARG_WITH([dbus],
+ 	with_dbus=auto
+ )
+ # In auto mode, prefer dbus-sharp
+-PKG_CHECK_EXISTS([dbus-sharp-1.0], DBUS_SHARP_SUPPORT=yes, DBUS_SHARP_SUPPORT=no)
++PKG_CHECK_EXISTS([dbus-sharp-glib-1.0], DBUS_SHARP_SUPPORT=yes, DBUS_SHARP_SUPPORT=no)
+ PKG_CHECK_EXISTS([ndesk-dbus-1.0], NDESK_DBUS_SUPPORT=yes, NDESK_DBUS_SUPPORT=no)
+ if test "x$with_dbus" = "xauto"; then
+-   if test "$DBUS_SHARP_SUPPORT" = "xyes"; then
+-      ENABLE_DBUS=$DBUS_SHARP_SUPPORT
++   if test "x$DBUS_SHARP_SUPPORT" = "xyes"; then
++      ENABLE_DBUS=$DBUS_SHARP_SUPPORT;ENABLE_DBUS_SHARP="yes"
+    else
+-      ENABLE_DBUS=$NDESK_DBUS_SUPPORT
++      ENABLE_DBUS=$NDESK_DBUS_SUPPORT;ENABLE_NDESK_DBUS="yes"
+    fi
+ fi
+ # If we found a package or the user told us
+-if test "x$with_dbus" = "xyes"; then
++if test "x$with_dbus" != "xno"; then
+    if test "x$DBUS_SHARP_SUPPORT" = "xyes"; then
+-      PKG_CHECK_MODULES(DBUS_SHARP, dbus-sharp-glib-1.0, ENABLE_NDESK_DBUS="yes", ENABLE_NDESK_DBUS="no")
++      PKG_CHECK_MODULES(DBUS_SHARP, dbus-sharp-glib-1.0, ENABLE_DBUS_SHARP="yes", ENABLE_DBUS_SHARP="no")
+       AC_SUBST(DBUS_LIBS, "$DBUS_SHARP_LIBS")
+    else
+-      PKG_CHECK_MODULES(DBUS_NDESK, ndesk-dbus-glib-1.0, ENABLE_DBUS_SHARP="yes", ENABLE_DBUS_SHARP="no")
++      PKG_CHECK_MODULES(DBUS_NDESK, ndesk-dbus-glib-1.0, ENABLE_NDESK_DBUS="yes", ENABLE_NDESK_DBUS="no")
+       AC_SUBST(DBUS_LIBS, "$DBUS_NDESK_LIBS")
+    fi
+ fi

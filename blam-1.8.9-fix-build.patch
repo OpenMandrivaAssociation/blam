@@ -1,0 +1,11 @@
+--- blam-1.8.9/src/Application.cs.preprocessor	2011-08-14 12:07:42.000000000 +0200
++++ blam-1.8.9/src/Application.cs	2011-08-14 12:07:53.000000000 +0200
+@@ -22,7 +22,7 @@ using WebKit;
+ #if DBUS_SHARP
+ using DBus;
+ using org.freedesktop.DBus;
+-#elseif NDESK_DBUS
++#elif NDESK_DBUS
+ using NDesk.DBus;
+ using org.freedesktop.DBus;
+ #endif
