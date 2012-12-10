@@ -17,7 +17,6 @@ Patch3: blam-1.8.9-fix-dbus-configure-check.patch
 License: GPLv2+
 Group: Networking/Other
 Url:  http://blam.cmartin.tk/
-BuildRoot: %{_tmppath}/%{name}-%{version}-%{release}-buildroot
 BuildArch: noarch
 BuildRequires: mono-devel
 BuildRequires: gnome-sharp2-devel
@@ -26,7 +25,7 @@ BuildRequires: glade-sharp2
 BuildRequires: dbus-sharp-glib-devel
 BuildRequires: webkit-sharp-devel
 BuildRequires: notify-sharp-devel
-BuildRequires: libGConf2-devel
+BuildRequires: pkgconfig(gconf-2.0)
 BuildRequires: imagemagick
 BuildRequires: desktop-file-utils
 BuildRequires: intltool
@@ -47,7 +46,6 @@ autoconf
 %make
 
 %install
-rm -rf $RPM_BUILD_ROOT
 %makeinstall_std
 mkdir -p %buildroot{%_liconsdir,%_iconsdir,%_miconsdir}
 cp icons/48x48/%name.png %buildroot%_liconsdir/%name.png
@@ -55,30 +53,6 @@ cp icons/32x32/%name.png %buildroot%_iconsdir/%name.png
 cp icons/16x16/%name.png %buildroot%_miconsdir/%name.png
 
 %find_lang %name
-
-%if %mdkversion < 200900
-%post
-%update_scrollkeeper
-%update_desktop_database
-%post_install_gconf_schemas %name
-%{update_menus}
-%update_icon_cache hicolor
-%endif
-
-%preun
-%preun_uninstall_gconf_schemas %name
-
-%if %mdkversion < 200900
-%postun
-%{clean_menus}
-%clean_scrollkeeper
-%clean_desktop_database
-%clean_icon_cache hicolor
-%endif
-
-%clean
-rm -rf $RPM_BUILD_ROOT
-
 %files -f %name.lang
 %defattr(-,root,root)
 %doc AUTHORS ChangeLog NEWS README
