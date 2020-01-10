@@ -37,7 +37,7 @@ This is a GNOME RSS aggregator based on Mono.
 
 %prep
 %setup -q -n %name-%version
-%apply_patches
+%autopatch -p1
 
 autoconf
 
