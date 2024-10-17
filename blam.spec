@@ -16,7 +16,7 @@ Patch3: blam-1.8.9-fix-dbus-configure-check.patch
 
 License: GPLv2+
 Group: Networking/Other
-Url:  http://blam.cmartin.tk/
+Url:  https://blam.cmartin.tk/
 BuildArch: noarch
 BuildRequires: mono-devel
 BuildRequires: gnome-sharp2-devel
