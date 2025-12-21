@@ -18,6 +18,11 @@ License: GPLv2+
 Group: Networking/Other
 Url:  https://blam.cmartin.tk/
 BuildArch: noarch
+BuildRequires:	autoconf
+BuildRequires:	automake
+BuildRequires:	libtool-base
+BuildRequires:	slibtool
+BuildRequires:	make
 BuildRequires: mono-devel
 BuildRequires: gnome-sharp2-devel
 BuildRequires: gnome-desktop-sharp-devel
